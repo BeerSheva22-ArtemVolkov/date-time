@@ -39,7 +39,7 @@ class DateTimeTests {
 	
 	@Test
 	void nextFriday13Test() {
-		LocalDate closestF13 = LocalDate.now().with(new NextFriday13());
+		LocalDate closestF13 = LocalDate.of(2023, 1, 13).with(new NextFriday13());
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.forLanguageTag("en"));
 		System.out.printf("Next friday 13th will be in %s\n" , closestF13.format(dtf));
 		assertEquals(closestF13, LocalDate.parse("2023-10-13"));
@@ -51,7 +51,7 @@ class DateTimeTests {
 	@Test
 	void nextWorkingDay() {
 		int daysAfter = 10;
-		LocalDate workingDayAfter = LocalDate.now().with(new WorkingDays(new DayOfWeek[] {DayOfWeek.SATURDAY, DayOfWeek.SUNDAY}, daysAfter));
+		LocalDate workingDayAfter = LocalDate.of(2023, 2, 15).with(new WorkingDays(new DayOfWeek[] {DayOfWeek.SATURDAY, DayOfWeek.SUNDAY}, daysAfter));
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.forLanguageTag("en"));
 		System.out.printf("Next working day after %s day will be in %s\n", daysAfter, workingDayAfter.format(dtf));
 		assertEquals(workingDayAfter, LocalDate.parse("2023-03-01"));

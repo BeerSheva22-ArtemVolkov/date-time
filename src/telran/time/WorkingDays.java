@@ -10,20 +10,19 @@ import java.util.List;
 
 public class WorkingDays implements TemporalAdjuster {
 
-	DayOfWeek[] dayOffs;
-	int daysCount;
+	private DayOfWeek[] dayOffs;
+	private int daysCount;
 	
 	@Override
 	public Temporal adjustInto(Temporal temporal) {
-		Temporal res = LocalDate.now();
 		List<DayOfWeek> dayOffsList = Arrays.asList(dayOffs);
 		do {
-			if (!dayOffsList.contains(LocalDate.from(res).getDayOfWeek())) {
+			if (!dayOffsList.contains(LocalDate.from(temporal).getDayOfWeek())) {
 				daysCount--;
 			}
-			res = res.plus(1, ChronoUnit.DAYS);
+			temporal = temporal.plus(1, ChronoUnit.DAYS);
 		} while (daysCount > 0);
-		return res;
+		return temporal;
 	}
 
 	public WorkingDays(DayOfWeek[] dayOffs, int daysCount) {
